@@ -146,7 +146,7 @@ Future<Uint8List> _xdec(Uint8List key, Uint8List nonce, Uint8List aad, Uint8List
   final ct = ctTag.sublist(0, ctTag.length - 16);
   final tag = ctTag.sublist(ctTag.length - 16);
   try {
-    final box = cg.SecretBox(ct, nonce: cg.Nonce(nonce), mac: cg.Mac(tag));
+    final box = cg.SecretBox(ct, nonce: nonce, mac: cg.Mac(tag));
     final clear = await _xchacha.decrypt(box, secretKey: cg.SecretKey(key), aad: aad);
     return Uint8List.fromList(clear);
   } catch (e) {
